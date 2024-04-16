@@ -29,7 +29,7 @@ export class AppComponent {
   ) {
     this.authService.user.subscribe((u) => {
       this.user = u;
-      this.isLogin = !this.isLogin;
+      this.isLogin = u?.id ? !this.isLogin : false;
     });
   }
 

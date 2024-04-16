@@ -18,6 +18,11 @@ export const routes: Routes = [
         title: 'Login page'
     },
     {
+        path: 'login/validateOtp',
+        component: LoginComponent,
+        title: 'Validate OTP',
+    },
+    {
         path: 'register',
         component: RegistrationComponent,
         title: 'Registration'
