@@ -20,6 +20,7 @@ import { CommonModule } from '@angular/common';
 export class AppComponent {
   title = 'two factor authentication';
   user? = "";
+  isLogin? = false;
 
   constructor() {}
 
