@@ -1,5 +1,5 @@
 import { Injectable, inject } from '@angular/core';
-import { CanActivateFn, Router } from '@angular/router';
+import { ActivatedRouteSnapshot, CanActivateFn, Router, RouterStateSnapshot } from '@angular/router';
 import { AuthenticationService } from '../services/authentication.service';
 
 @Injectable({
@@ -12,11 +12,11 @@ class PermissionService {
   }
 }
 
-export const authGuard: CanActivateFn = () => {
+export const authGuard: CanActivateFn = (route: ActivatedRouteSnapshot, state: RouterStateSnapshot) => {
   const router = inject(Router);
   const isLoggedin = inject(PermissionService).canActivate();
   if(!isLoggedin) {
-    router.navigate(['/login'])
+    router.navigate(['/login'], { queryParams: { returnUrl: state.url }})
     return false;
   }
   return true;
