@@ -3,12 +3,14 @@ import { LoginComponent } from './login/login.component';
 import { RegistrationComponent } from './registration/registration.component';
 import { HomepageComponent } from './homepage/homepage.component';
 import { SettingComponent } from './setting/setting.component';
+import { authGuard } from './helper/auth.guard';
 
 export const routes: Routes = [
     {
         path: '',
         component: HomepageComponent,
-        title: 'Home page'
+        title: 'Home page',
+        canActivate: [authGuard]
     },
     {
         path: 'login',
@@ -23,7 +25,8 @@ export const routes: Routes = [
     {
         path: 'settings',
         component: SettingComponent,
-        title: 'User settings'
+        title: 'User settings',
+        canActivate: [authGuard]
     },
 
 ];

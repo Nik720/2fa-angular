@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { RouterModule, RouterOutlet } from '@angular/router';
+import { Router, RouterModule, RouterOutlet } from '@angular/router';
 import { LoginComponent } from './login/login.component';
 import { AlertsComponent } from './components/alerts/alerts.component';
 import { CommonModule } from '@angular/common';
@@ -22,10 +22,11 @@ export class AppComponent {
   user? = "";
   isLogin? = false;
 
-  constructor() {}
+  constructor(private router: Router) {}
 
   logout() {
-
+    this.isLogin = false;
+    this.router.navigate(['/login']);
   }
 
  }
