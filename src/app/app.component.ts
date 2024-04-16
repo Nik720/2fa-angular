@@ -1,13 +1,30 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { RouterModule, RouterOutlet } from '@angular/router';
+import { LoginComponent } from './login/login.component';
+import { AlertsComponent } from './components/alerts/alerts.component';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet],
+  imports: [
+    CommonModule,
+    RouterModule,
+    RouterOutlet,
+    LoginComponent,
+    AlertsComponent
+  ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  title = '2fa-angular';
-}
+  title = 'two factor authentication';
+  user? = "";
+
+  constructor() {}
+
+  logout() {
+
+  }
+
+ }
