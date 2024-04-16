@@ -1,19 +1,37 @@
 <div class="d-flex align-items-center bg-body-tertiary account-form-wrapper">
     <div class="form-signin w-100 m-auto">
-        <form>
+        <form [formGroup]="registrationForm" (submit)="onSubmit()">
         <h1 class="h3 mb-3 fw-normal">Please sign up</h1>
     
         <div class="form-floating">
-            <input type="text" class="form-control" id="name" placeholder="John wisly">
-            <label for="name">Name</label>
+            <input type="text" class="form-control" id="firstname" placeholder="John wisly" formControlName="firstname" [ngClass]="{ 'is-invalid': submitted && f['firstname'].errors }">
+            <label for="firstname">First Name</label>
+            <div *ngIf="submitted && f['firstname'].errors" class="invalid-feedback mb-2">
+                <div *ngIf="f['firstname'].errors['required']">First name is required</div>
+            </div>
         </div>
         <div class="form-floating">
-            <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
+            <input type="text" class="form-control" id="lastname" placeholder="John wisly" formControlName="lastname" [ngClass]="{ 'is-invalid': submitted && f['lastname'].errors }">
+            <label for="lastname">Last Name</label>
+            <div *ngIf="submitted && f['lastname'].errors" class="invalid-feedback mb-2">
+                <div *ngIf="f['lastname'].errors['required']">Name is required</div>
+            </div>
+        </div>
+        <div class="form-floating">
+            <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com" formControlName="email" [ngClass]="{ 'is-invalid': submitted && f['email'].errors }">
             <label for="floatingInput">Email address</label>
+            <div *ngIf="submitted && f['email'].errors" class="invalid-feedback mb-2">
+                <div *ngIf="f['email'].errors['required']">Email is required</div>
+                <div *ngIf="f['email'].errors['email']">Invalid Email format</div>
+            </div>
         </div>
         <div class="form-floating">
-            <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
+            <input type="password" class="form-control" id="floatingPassword" placeholder="Password"  formControlName="password" [ngClass]="{ 'is-invalid': submitted && f['password'].errors }">
             <label for="floatingPassword">Password</label>
+            <div *ngIf="submitted && f['password'].errors" class="invalid-feedback mb-2">
+                <div *ngIf="f['password'].errors['required']">Password is required</div>
+                <div *ngIf="f['password'].errors['minlength']">Minimum length should be 6 character</div>
+            </div>
         </div>
     
         <button class="btn btn-primary w-100 py-2" type="submit">Sign up</button>
