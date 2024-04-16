@@ -1,10 +1,45 @@
 <div class="p-3">
-    <div *ngIf="!is2FAEnabled; else elseBlock">
-        <h3>Enable Two Factor authentication</h3>
-        <button class="btn btn-primary" (click)="enable2FA()">Enable 2FA</button>
+    <div *ngIf="!processing">
+        <div *ngIf="!is2FAEnabled; else elseBlock">
+            <h3>Secure your account with TOTP two factor authentication</h3>
+            <button class="btn btn-primary" (click)="enable2FA()">Setup 2FA</button>
+        </div>
+        <ng-template #elseBlock>
+            <h3>Disable Two Factor authentication</h3>
+            <button class="btn btn-primary" (click)="disable2FA()">Disable 2FA</button>
+        </ng-template>
     </div>
-    <ng-template #elseBlock>
-        <h3>Disable Two Factor authentication</h3>
-        <button class="btn btn-primary" (click)="disable2FA()">Disable 2FA</button>
-    </ng-template>
+</div>
+
+<div *ngIf="totpDetail && processing">
+    <div class="modal modal-sheet position-static d-block bg-body-secondary p-4 py-md-5 setup2fa" tabindex="-1" role="dialog" id="modalSheet">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content rounded-4 shadow">
+                <div class="modal-header border-bottom-0">
+                    <h1 class="modal-title fs-5">Two-Factor Authentication</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="processing = !processing"></button>
+                </div>
+                <div class="modal-body">
+                    <p class="heading">Configuring Google Authenticator or Authy</p>
+                    <ul>
+                        <li>Install Google Authenticator or Authy app (IOS - Android).</li>
+                        <li>In the authenticatior app, select "+" icon.</li>
+                        <li>Select "Scan a QR code" and scan this QR code</li>
+                    </ul>
+                    <p class="heading">Scan QR Code</p>
+                    <img src="{{totpDetail.qrCodeUrl}}" alt="TOTP QR Code">
+                    <p class="heading">Or Enter Code into your app</p>
+                    <p><strong>SecretKey: </strong>{{totpDetail.secret}}</p>
+                    <p class="heading">Verify Code</p>
+                    <p>For changing the setting, please verify the authentication code:</p>
+                    <input type="text" name="authcode" id="authcode" [(ngModel)]="authCode" maxlength="6">
+                </div>
+
+                <div class="modal-footer w-100 pb-3">
+                    <button type="button" class="btn btn-outline" data-bs-dismiss="modal" (click)="processing = !processing">Close</button>
+                    <button type="button" class="btn btn-primary" (click)="verifyOtp()">Verify & Activate</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

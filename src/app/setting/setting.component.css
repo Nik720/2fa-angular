@@ -1,0 +1,28 @@
+.setup2fa .heading {
+    font-weight: bold;
+    color: #3491a4;
+    margin-bottom: 5px;
+    border-bottom: 1px solid #cecece;
+    font-size: 16px;
+}
+
+.setup2fa img {
+    display: block;
+    width: 160px;
+    margin: 0 auto;
+}
+
+.setup2fa .modal-body {
+    font-size: 14px;
+}
+
+.setup2fa input {
+    width: 50%;
+    height: 40px;
+    background-color: #f8f8f8;
+    border: 1px solid #000000;
+    font-weight: bold;
+    font-size: 20px;
+    letter-spacing: 4px;
+    padding: 5px;
+}

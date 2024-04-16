@@ -7,3 +7,8 @@ export class User {
     token?: string;
     enabled2fa?: boolean;
 }
+
+export interface TOTP {
+    qrCodeUrl: string;
+    secret: string;
+}

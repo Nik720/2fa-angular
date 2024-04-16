@@ -32,8 +32,10 @@ export class AuthenticationService {
     return this.http.post(`${this.apiURL}/auth/login`, {email, password})
           .pipe(map((user: any) => {
             const currentUser = user['data'].user;
-            localStorage.setItem('user', JSON.stringify(currentUser));
-            this.userSubject.next(currentUser);
+            if(!currentUser.enabled2fa) {
+              localStorage.setItem('user', JSON.stringify(currentUser));
+              this.userSubject.next(currentUser);
+            }
             return currentUser;
           }))
   }
@@ -50,6 +52,14 @@ export class AuthenticationService {
 
   public get userValue() {
     return this.userSubject.value;
+  }
+
+  enable2fa() {
+    return this.http.post(`${this.apiURL}/auth/enable2fa`, {userId: this.userSubject.value?.id});
+  }
+
+  verifyOtp(otp: string) {
+    return this.http.post(`${this.apiURL}/auth/verify2fa`, {userId: this.userSubject.value?.id, token: otp});
   }
 
 
