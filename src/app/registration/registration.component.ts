@@ -58,8 +58,9 @@ export class RegistrationComponent implements OnInit {
           console.log("registration successful");
           this.router.navigate(['../login'], {relativeTo: this.route})
         },
-        error: () => {
-          
+        error: (error) => {
+          console.log(`Error while registering user ${error}`)
+          this.loading = false;
         }
       })
   }
