@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
-import { Router, RouterModule, RouterOutlet } from '@angular/router';
+import { RouterModule, RouterOutlet } from '@angular/router';
 import { LoginComponent } from './login/login.component';
 import { AlertsComponent } from './components/alerts/alerts.component';
 import { CommonModule } from '@angular/common';
+import { AuthenticationService } from './services/authentication.service';
+import { User } from './models/user';
 
 @Component({
   selector: 'app-root',
@@ -19,14 +21,21 @@ import { CommonModule } from '@angular/common';
 })
 export class AppComponent {
   title = 'two factor authentication';
-  user? = "";
+  user? : User | null;
   isLogin? = false;
 
-  constructor(private router: Router) {}
+  constructor(
+    private authService: AuthenticationService
+  ) {
+    this.authService.user.subscribe((u) => {
+      this.user = u;
+      this.isLogin = !this.isLogin;
+    });
+  }
 
   logout() {
+    this.authService.logout();
     this.isLogin = false;
-    this.router.navigate(['/login']);
   }
 
  }
