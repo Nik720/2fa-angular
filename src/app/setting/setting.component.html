@@ -1,0 +1,10 @@
+<div class="p-3">
+    <div *ngIf="!is2FAEnabled; else elseBlock">
+        <h3>Enable Two Factor authentication</h3>
+        <button class="btn btn-primary" (click)="enable2FA()">Enable 2FA</button>
+    </div>
+    <ng-template #elseBlock>
+        <h3>Disable Two Factor authentication</h3>
+        <button class="btn btn-primary" (click)="disable2FA()">Disabble 2FA</button>
+    </ng-template>
+</div>
