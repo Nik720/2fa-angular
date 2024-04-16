@@ -30,10 +30,11 @@ export class AuthenticationService {
 
   login(email: string, password: string) {
     return this.http.post(`${this.apiURL}/auth/login`, {email, password})
-          .pipe(map(user => {
-            localStorage.setItem('user', JSON.stringify(user));
-            this.userSubject.next(user);
-            return user;
+          .pipe(map((user: any) => {
+            const currentUser = user['data'].user;
+            localStorage.setItem('user', JSON.stringify(currentUser));
+            this.userSubject.next(currentUser);
+            return currentUser;
           }))
   }
 
@@ -45,6 +46,10 @@ export class AuthenticationService {
 
   public isUserAuthenticated() {
     return this.userSubject.value ? true : false;
+  }
+
+  public get userValue() {
+    return this.userSubject.value;
   }
 
 
