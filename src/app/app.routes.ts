@@ -4,6 +4,7 @@ import { RegistrationComponent } from './registration/registration.component';
 import { HomepageComponent } from './homepage/homepage.component';
 import { SettingComponent } from './setting/setting.component';
 import { authGuard } from './helper/auth.guard';
+import { VerifyOtpComponent } from './verify-otp/verify-otp.component';
 
 export const routes: Routes = [
     {
@@ -19,7 +20,7 @@ export const routes: Routes = [
     },
     {
         path: 'login/validateOtp',
-        component: LoginComponent,
+        component: VerifyOtpComponent,
         title: 'Validate OTP',
     },
     {
