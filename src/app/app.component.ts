@@ -40,7 +40,7 @@ export class AppComponent implements OnInit {
         this.currentUrl = event.url;
         this.authService.user.subscribe((u) => {
           this.user = u;
-          this.isLogin = u?.id && !this.currentUrl?.includes('/validateOtp') ? !this.isLogin : false;
+          this.isLogin = u?.id && !this.currentUrl?.includes('/validateOtp') ? true : false;
         });
       });
   }
