@@ -1,0 +1,20 @@
+<div class="d-flex align-items-center bg-body-tertiary account-form-wrapper">
+    <div class="form-signin w-100 m-auto">
+        <form [formGroup]="otpForm" (submit)="validateOtp()">
+            <h1 class="h3 mb-3 fw-normal">Verify OTP</h1>
+        
+            <div class="form-floating mb-2">
+                <input type="text" class="form-control" id="otp" placeholder="Enter OTP" formControlName="otp" maxlength="6" [ngClass]="{ 'is-invalid': submitted && f['otp'].errors }">
+                <label for="otp">OTP</label>
+                <div *ngIf="submitted && f['otp'].errors" class="invalid-feedback mb-2">
+                    <div *ngIf="f['otp'].errors['required']">OTP is required</div>
+                </div>
+            </div>
+        
+            <button [disabled]="loading" class="btn btn-primary w-100 py-2" type="submit">
+                <span *ngIf="loading" class="spinner-border spinner-border-sm me-1"></span>
+               Verify
+            </button>
+        </form>
+    </div>
+</div>
