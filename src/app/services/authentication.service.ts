@@ -32,10 +32,8 @@ export class AuthenticationService {
     return this.http.post(`${this.apiURL}/auth/login`, {email, password})
           .pipe(map((user: any) => {
             const currentUser = user['data'].user;
-            if(!currentUser.enabled2fa) {
-              localStorage.setItem('user', JSON.stringify(currentUser));
-              this.userSubject.next(currentUser);
-            }
+            localStorage.setItem('user', JSON.stringify(currentUser));
+            this.userSubject.next(currentUser);
             return currentUser;
           }))
   }

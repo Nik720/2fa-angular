@@ -53,12 +53,10 @@ export class LoginComponent implements OnInit {
       .subscribe({
         next: (user) => {
           console.log("Login successfully");
+          let returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
           if(user.enabled2fa) {
-            const verify2faUrl = '/login/validateOtp';
-            this.router.navigateByUrl(verify2faUrl);
-            return;
+            returnUrl = this.route.snapshot.queryParams['returnUrl'] ? `/login/validateOtp?${this.route.snapshot.queryParams['returnUrl']}` : '/login/validateOtp';
           }
-          const returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
           this.router.navigateByUrl(returnUrl);
         },
         error: (error: any) => {
